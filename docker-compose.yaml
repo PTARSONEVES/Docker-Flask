@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./services/web
+#    command: flask --app project run --host=0.0.0.0
+    command: python manage.py run -h 0.0.0.0
+
+    volumes:
+      - ./services/web/:/usr/src/app/
+    ports:
+      - 8000:5000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=strolandia
+      - MYSQL_DATABASE=docker_flask
+      - MYSQL_USER=detarso
+      - MYSQL_PASSWORD=strolandia1
+    ports:
+      - 3307:3306
+volumes:
+  mysql_data:
