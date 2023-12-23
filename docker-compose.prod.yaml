@@ -28,6 +28,6 @@ services:
       - MYSQL_USER=detarso
       - MYSQL_PASSWORD=strolandia1
     ports:
-      - 3307:3306
+      - 3306:3306
 volumes:
   mysql_data_prod:
