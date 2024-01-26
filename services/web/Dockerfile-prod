@@ -67,4 +67,6 @@ RUN chmod 755 entrypoint.prod.sh
 USER app
 
 # run entrypoint.prod.sh
-#ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
+
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
+ENTRYPOINT ["/home/app/web/monitor.sh"]
