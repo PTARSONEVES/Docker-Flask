@@ -1,5 +1,5 @@
 #!/bin/bash
-UP=$(pgrep mysql | wc -l );
+UP=$(pgrep manage | wc -l );
 if [ $UP -ne 0 ];
 then
         echo  " MySQL está fora do ar. " ;
