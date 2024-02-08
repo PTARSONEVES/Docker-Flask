@@ -10,7 +10,9 @@ def create_app(test_config=None):
         BASEDIR = os.path.abspath(os.path.dirname(__file__)),
         APP_ROOT = os.path.dirname(os.path.abspath(__file__)),
         DATABASE=os.path.join(app.instance_path, 'flask.sqlite'),
-        DOWNLOAD_PATH = os.path.join(app.instance_path+'\wkhtmltopdf\\bin','wkhtmltopdf.exe'),
+        DOWNLOAD_PATH = os.path.join(app.instance_path+'/wkhtmltopdf/zzz/','wkhtmltopdf.exe'),
+        STATIC_FOLDER = os.path.abspath(os.path.dirname(__file__)+'/staticfiles'),
+        MEDIA_FOLDER = os.path.abspath(os.path.dirname(__file__)+'/media'),
 
         SECRET_KEY=BaseConfig.SECRET_KEY,
         SECURITY_PASSWORD_SALT=BaseConfig.SECURITY_PASSWORD_SALT,
@@ -57,6 +59,9 @@ def create_app(test_config=None):
 
     print('SSS:',BaseConfig.EMPRESA_RSOC)
     print('Download_path:  ',app.config["DOWNLOAD_PATH"])
+    print('Basedir: ',app.config["BASEDIR"])
+    print('Static_folder: ',app.config["STATIC_FOLDER"])
+    print('Media_folder: ',app.config["MEDIA_FOLDER"])
     print('OK')
 #   print(app.config.items())
 
@@ -75,6 +80,9 @@ def create_app(test_config=None):
 
     from .controller.pdf import pdf
     app.register_blueprint(pdf.bp)
+
+    from .controller.files import managefiles
+    app.register_blueprint(managefiles.bp)
 
     app.add_url_rule('/', endpoint='home')
     app.add_url_rule('/register', endpoint='register')
