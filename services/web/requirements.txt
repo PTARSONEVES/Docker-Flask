@@ -39,6 +39,6 @@ SQLAlchemy==2.0.23
 typing_extensions==4.9.0
 urllib3==2.2.0
 Werkzeug==3.0.1
-wkhtmltopdf==0.2
+#wkhtmltopdf==0.2
 WTForms==3.1.2
 zope.interface==6.1

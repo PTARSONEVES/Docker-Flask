@@ -53,7 +53,7 @@ class BaseConfig(object):
     MAIL_USE_SSL=True
     MAIL_DEFAULT_SENDER="ptarsoneves@squallo.net"
     MAIL_USERNAME='ptarsoneves@squallo.net'
-    MAIL_PASSWORD='Strol@ndi@334@'
+    MAIL_PASSWORD='Pt@rso334@'
 
 
     #CORRESPONDENCIA
