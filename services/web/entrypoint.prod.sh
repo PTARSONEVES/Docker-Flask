@@ -1,7 +1,8 @@
 #!/bin/sh
+
 if [ "$DATABASE"="mysql" ]
 then
-    echo $DATABASE
+#    echo $DATABASE
     echo "Waiting for mysql..."
 #    while ! nc -z $SQL_HOST $SQL_PORT; 
 #    while ! mysql --host='localhost' --user='root' --password='strolandia';
@@ -11,6 +12,6 @@ then
 #        sleep 3
 #        echo "aguardando o mysql..."
 #    done
-#    echo "Mysql started"
+    echo "Mysql started"
 fi
 exec "$@"
