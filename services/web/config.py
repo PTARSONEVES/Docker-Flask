@@ -35,17 +35,18 @@ class BaseConfig(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     #BANCO DE DADOS
     TYPE_CONNECT = 'mysql'
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     #SQLITE - LOCALHOST
     SQLITE_CONNECT = 'sqlite:///' + os.path.join(basedir, 'dev.sqlite')
     MYSQL_HOST = 'localhost'
     #MYSQL_HOST = 'flask_loterias.mysql.dbaas.com.br'
-    MYSQL_USER = 'root'
+    MYSQL_USER = 'detarso'
     #MYSQL_USER = 'flask_loterias'
-    MYSQL_PASS = 'strolandia'
+    MYSQL_PASS = 'strolandia1'
     #MYSQL_PASS = 'Strol!ndi!1'
     MYSQL_PORT = 3307
-    MYSQL_DATABASE = 'flask_layout'
+    MYSQL_DATABASE = 'docker_flask'
     #CORRESPONDENCIA
     MAIL_SERVER='email-ssl.com.br'
     MAIL_PORT=587

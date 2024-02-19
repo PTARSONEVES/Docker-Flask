@@ -10,11 +10,12 @@ def create_app(test_config=None):
         BASEDIR = os.path.abspath(os.path.dirname(__file__)),
         APP_ROOT = os.path.dirname(os.path.abspath(__file__)),
         DATABASE=os.path.join(app.instance_path, 'flask.sqlite'),
-        DOWNLOAD_PATH = os.path.join(app.instance_path+'/wkhtmltopdf/zzz/','wkhtmltopdf.exe'),
+        DOWNLOAD_PATH = os.path.join(app.instance_path+'/wkhtmltopdf/bin/','wkhtmltopdf.exe'),
         #STATIC_FOLDER = os.path.abspath(os.path.dirname(__file__)+'/staticfiles'),
         #MEDIA_FOLDER = os.path.abspath(os.path.dirname(__file__)+'/media'),
         STATIC_FOLDER = app.instance_path+'/files/static',
         MEDIA_FOLDER = app.instance_path+'/files/media',
+        PDF_FOLDER = app.instance_path+'/files/pdf',
 
         SECRET_KEY=BaseConfig.SECRET_KEY,
         SECURITY_PASSWORD_SALT=BaseConfig.SECURITY_PASSWORD_SALT,
