@@ -24,6 +24,10 @@ COPY . /usr/src/app/
 #RUN flake8 --ignore=E501,F401 .
 
 # install python dependencies
+#RUN --mount=type=cache,target=/root/.cache/pip \
+#    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+#    python -m pip install -r requirements.txt
+
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
@@ -36,7 +40,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 FROM python:3.11.3-slim-buster
 
 # create directory for the app user
-RUN mkdir -p /home/app && mkdir -p /home/app/web
+RUN mkdir -p /home/app && mkdir -p /home/app/web && mkdir -p /run/secrets
 
 # create the app user
 RUN addgroup --system app && adduser --system --group app
@@ -50,7 +54,8 @@ WORKDIR $APP_HOME
 #RUN apt-get install -y --no-install-recommends netcat
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-RUN apt-get update && apt-get install -y wkhtmltopdf xvfb
+#RUN apt-get update && apt-get install -y wkhtmltopdf xvfb
+RUN apt-get update 
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
 
@@ -63,11 +68,12 @@ COPY ./entrypoint.sh /usr/local/bin/
 COPY . $APP_HOME
 
 # chown all the files to the app user
-RUN chown -Rc app:app $APP_HOME
+RUN chown -R app:app $APP_HOME
 RUN chmod 755 entrypoint.sh
 
 # change to the app user
-USER app
+ USER root
 
-#RUN entrypoint.prod.sh
-ENTRYPOINT ["/home/app/web/entrypoint.sh"]
+#RUN entrypoint.sh
+#CMD [ "flask", "--app", "flaskr", "--host=0.0.0.0" ]
+#ENTRYPOINT ["/home/app/web/entrypoint.sh"]

@@ -38,7 +38,12 @@ def create_app(test_config=None):
         MYSQL_USER = BaseConfig.MYSQL_USER,
         MYSQL_PASS = BaseConfig.MYSQL_PASS,
         MYSQL_PORT = BaseConfig.MYSQL_PORT,
-        MYSQL_DATABASE = BaseConfig.MYSQL_DATABASE
+        MYSQL_DATABASE = BaseConfig.MYSQL_DATABASE,
+        MYDOCKER_HOST = BaseConfig.MYDOCKER_HOST,
+        MYDOCKER_USER = BaseConfig.MYDOCKER_USER,
+        MYDOCKER_PASS = BaseConfig.MYDOCKER_PASS,
+        MYDOCKER_PORT = BaseConfig.MYDOCKER_PORT,
+        MYDOCKER_DATABASE = BaseConfig.MYDOCKER_DATABASE
     )
 
     if test_config is None:

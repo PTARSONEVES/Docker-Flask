@@ -41,12 +41,18 @@ class BaseConfig(object):
     SQLITE_CONNECT = 'sqlite:///' + os.path.join(basedir, 'dev.sqlite')
     MYSQL_HOST = 'localhost'
     #MYSQL_HOST = 'flask_loterias.mysql.dbaas.com.br'
-    MYSQL_USER = 'detarso'
+    MYSQL_USER = 'root'
     #MYSQL_USER = 'flask_loterias'
-    MYSQL_PASS = 'strolandia1'
+    MYSQL_PASS = 'strolandia'
     #MYSQL_PASS = 'Strol!ndi!1'
     MYSQL_PORT = 3307
     MYSQL_DATABASE = 'docker_flask'
+    # DOCKER
+    MYDOCKER_HOST = 'localhost'
+    MYDOCKER_USER = 'root'
+    MYDOCKER_PASS = 'strolandia'
+    MYDOCKER_PORT = 3307
+    MYDOCKER_DATABASE = 'docker_flask'
     #CORRESPONDENCIA
     MAIL_SERVER='email-ssl.com.br'
     MAIL_PORT=587

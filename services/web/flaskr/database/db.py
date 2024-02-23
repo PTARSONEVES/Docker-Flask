@@ -27,8 +27,26 @@ def connection():
         print('Erro de Conexão')
         exit(1)
 
+def dockerconnect():
+    try:
+        c = pymysql.connect(
+            host=current_app.config["MYDOCKER_HOST"],
+            user=current_app.config["MYDOCKER_USER"],
+            passwd=current_app.config["MYDOCKER_PASS"],
+            database=current_app.config["MYDOCKER_DATABASE"],
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
+        )
+        return c
+    except:
+        print('Erro de Conexão')
+        exit(1)
+
+
 def get_db():
     typeconnect = current_app.config["TYPE_CONNECT"]
+    print('Tipo de conexão: ',typeconnect)
     if 'db' not in g:
         if typeconnect == 'sqlite':
             g.db = sqlite3.connect(
@@ -43,6 +61,12 @@ def get_db():
                 print('USANDO MYSQL')
             except:
                 print('FALHA NA CONEXÃO')
+        if typeconnect == 'mydocker':
+            try:
+               g.db = dockerconnect().cursor()
+               print('USANDO MYDOCKER')
+            except:
+               print('FALHA NA CONEXÃO')
     return g.db
 
 def close_db(e=None):
