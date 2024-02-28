@@ -3,8 +3,8 @@
 ###########
 
 #pull official base image
-FROM python:3.11.3-slim-buster as builder
-
+#FROM python:3.11.3-slim-buster as builder
+FROM python:3.9.18 as builder
 # set work directory
 WORKDIR /usr/src/app
 
@@ -13,8 +13,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends gcc && \
+    apt-get install -y pkg-config
 
 
 # lint
@@ -37,7 +38,8 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 #########
 
 #pull official base image
-FROM python:3.11.3-slim-buster
+#FROM python:3.11.3-slim-buster
+FROM python:3.9.18
 
 # create directory for the app user
 RUN mkdir -p /home/app && mkdir -p /home/app/web && mkdir -p /run/secrets
@@ -54,7 +56,7 @@ WORKDIR $APP_HOME
 #RUN apt-get install -y --no-install-recommends netcat
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-#RUN apt-get update && apt-get install -y wkhtmltopdf xvfb
+RUN apt-get update && apt-get install -y wkhtmltopdf xvfb
 RUN apt-get update 
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
@@ -72,7 +74,7 @@ RUN chown -R app:app $APP_HOME
 RUN chmod 755 entrypoint.sh
 
 # change to the app user
- USER root
+ USER app
 
 #RUN entrypoint.sh
 #CMD [ "flask", "--app", "flaskr", "--host=0.0.0.0" ]

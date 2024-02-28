@@ -48,7 +48,7 @@ class BaseConfig(object):
     MYSQL_PORT = 3307
     MYSQL_DATABASE = 'docker_flask'
     # DOCKER
-    MYDOCKER_HOST = 'localhost'
+    MYDOCKER_HOST = 'mysql'
     MYDOCKER_USER = 'root'
     MYDOCKER_PASS = 'strolandia'
     MYDOCKER_PORT = 3307
